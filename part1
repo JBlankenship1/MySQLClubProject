@@ -1,14 +1,33 @@
 Purpose/Overview: The purpose of this project is to design and implement a database application to help a middle school manage its after-school club activities. 
 
-Clients and Users: The clients are faculty members who will use to the system to 
+Clients and Users: The clients are faculty members and school administrators who need to manage and view faculty assignments, events, budgets, clubs, members, and expenses and students who need to join and leave clubs and view meetings and events fot the clubs they are in. 
 
-Scope of the System:
+Scope of the System: 
+The system will need to to store clubs, classrooms, students, faculty members, scheduled meetings, events, annual budgets, and expenses. 
+The system will need to track total expenses and remaining budget for each club as well as 
+The sytem will need to retrieve lists of students in each club, lists of clubs and their faculty advisors, and lists of all meetings and events for a specific club for a given year. 
+It will need to generate a report of the total expenses and remaining budget for a club in a given year, 
+the total budget of all clubs in a given year, a list of all clubs advised by a given faculty member, list of all clubs a given studen belongs to, and all club meetings and events a student should attend on a given date. 
 
-Assumptions:
+Assumptions: 
+Each club has unique club name
+A club's budget may vary from year to year
+Each club schedules multiple meeings and events each year
+A club has exactly on advisor each year, but the advisor may change from year to year
+A faculty member may advise multiple clubs
+A student may join multiple clubs, and their club membership may change across different years
+Any student can join any club 
 
 Constraints:
+Will prevent double-booking of classrooms for meetings held by different clubs
+Prevent a club from scheduling overlapping meetings
+Prevent more than one faculty member from being appointed advisor to a single club for the same year
 
-Functional Requirements:
+Functional Requirements: In addition to the reporting requirements above the system will:
+Allow faculty/advisors to add or delete club meetings and events
+Allow faculty/advisors to assign a faculty advisor to a club in a year
+Allow students to join or leave a club
+
 
 
 
