@@ -12,7 +12,7 @@ the total budget of all clubs in a given year, a list of all clubs advised by a 
 Assumptions: 
 Each club has unique club name
 A club's budget may vary from year to year
-Each club schedules multiple meeings and events each year
+Each club schedules multiple meetings and events each year
 A club has exactly on advisor each year, but the advisor may change from year to year
 A faculty member may advise multiple clubs
 A student may join multiple clubs, and their club membership may change across different years
