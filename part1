@@ -5,9 +5,8 @@ Clients and Users: The clients are faculty members and school administrators who
 Scope of the System: 
 The system will need to to store clubs, classrooms, students, faculty members, scheduled meetings, events, annual budgets, and expenses. 
 The system will need to track total expenses and remaining budget for each club.
-The sytem will need to retrieve lists of students in each club, lists of clubs and their faculty advisors, and lists of all meetings and events for a specific club for a given year. 
-It will need to generate a report of the total expenses and remaining budget for a club in a given year, 
-the total budget of all clubs in a given year, a list of all clubs advised by a given faculty member, list of all clubs a given student belongs to, and all club meetings and events a student should attend on a given date. 
+The system will need to retrieve lists of students in each club, lists of clubs and their faculty advisors, and lists of all meetings and events for a specific club for a given year. 
+It will need to generate a report of the total expenses and remaining budget for a club in a given year, the total budget of all clubs in a given year, a list of all clubs advised by a given faculty member, list of all clubs a given student belongs to, and all club meetings and events a student should attend on a given date. 
 
 Assumptions: 
 Each club has unique club name
@@ -17,10 +16,10 @@ A club has exactly on advisor each year, but the advisor may change from year to
 A faculty member may advise multiple clubs
 A student may join multiple clubs, and their club membership may change across different years
 Any student can join any club
-We assume a club will have only one meeting per day.
-We assume a club will only have one event per day.
-We assume we do not need to prevent clubs from scheduling meetings at the same time as events.
-We assume expenses will each have a unique ID associated. 
+We assume a club will have a maximum of one meeting per day.
+We assume a club will have a maximum of one event per day.
+We assume we do not need to prevent individual clubs from scheduling meetings at the same time as events.
+We assume expenses will each have a unique ID associated with expenses. 
 We assume two clubs do not have combined meetings or events.
 
 Constraints:
