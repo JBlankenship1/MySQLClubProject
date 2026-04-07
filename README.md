@@ -8,19 +8,25 @@ database.
 The application will help a middle school manage its after-school club activities by maintaining the
 following information:
 
-• Clubs and their scheduled meetings (date, time, description, classroom), field-trip events
-(date, time, description), annual budgets, and expenses
+• Clubs and their scheduled meetings (date, time, description, classroom), field-trip events (date, time, description), annual budgets, and expenses
+
 • Faculty members and the clubs they advise
+
 • Students and their club memberships
 
 Assumptions
 You may assume the following:
 
 • Each club has a unique club name (e.g., Band, Orchestra, Speech, MathCounts, Choir, etc.)
+
 • A club’s budget may vary from year to year
+
 • Each club schedules multiple meetings and events each year
+
 • A club has exactly one advisor each year, but the advisor may change from year to year
+
 • A faculty member may advise multiple clubs
+
 • A student may join multiple clubs, and their club memberships may change across different years
 
 Meeting Link:
