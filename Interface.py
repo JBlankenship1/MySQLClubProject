@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import os
 import mysql.connector
 
-# Load variables from .env file
+# Load variables from safe .env file
 load_dotenv()
 
 dbConnection = mysql.connector.connect(
