@@ -213,7 +213,7 @@ DELIMITER ;
 
 
 
---Reports all students in a given club in a given year (Requirement 3b)
+--Reports all students in a given club in a given year (Requirement 1b & 3b)
 -- Call using this statement: CALL allClubStudents(CLUBNAME, YEAR);
 DELIMITER //
 CREATE PROCEDURE allClubStudents(IN inputClub VARCHAR(30), IN inputYear INT)
@@ -228,7 +228,7 @@ END //
 DELIMITER ;
 
 
---Reports all clubs a student is in (Requirement 3c)
+--Reports all clubs a student is in (Requirement 1c & 3c)
 -- Call using this statement: CALL allClubsFromStudent(STUDENTID);
 DELIMITER //
 CREATE PROCEDURE allClubsFromStudent(IN inputStudentID CHAR(6))
@@ -242,6 +242,44 @@ END //
 DELIMITER ;
 
 
+
+-- Report all events and meeting for a given club in a given year (Requirement 1d)
+-- Call using this statement: CALL ClubSchedule(CLUBNAME, YEAR)
+DELIMITER //
+CREATE PROCEDURE ClubSchedule(IN inputClub VARCHAR(30), IN inputYear INT)
+BEGIN
+    -- Meetings table
+    SELECT 
+        'Meeting' AS activityType,
+        Clubs.clubName,
+        Clubs.clubYear,
+        Meetings.meetingDate AS activityDate,
+        Meetings.meetingStartTime AS startTime,
+        Meetings.meetingEndTime AS endTime,
+        Meetings.classroom AS location
+    FROM Clubs
+    JOIN Meetings
+        ON Clubs.clubName = Meetings.clubName
+        AND Clubs.clubYear = Meetings.clubYear
+    WHERE Clubs.clubName = inputClub
+      AND Clubs.clubYear = inputYear;
+    -- Events table
+    SELECT 
+        'Event' AS activityType,
+        Clubs.clubName,
+        Clubs.clubYear,
+        ClubEvents.eventDate AS activityDate,
+        ClubEvents.eventStartTime AS startTime,
+        ClubEvents.eventEndTime AS endTime,
+        NULL AS location
+    FROM Clubs
+    JOIN ClubEvents
+        ON Clubs.clubName = ClubEvents.clubName
+        AND Clubs.clubYear = ClubEvents.clubYear
+    WHERE Clubs.clubName = inputClub
+      AND Clubs.clubYear = inputYear;
+END //
+DELIMITER ;
 
 --Reports the schedule of a given student on a given day (Requirement 3d)
 -- Call using this statement: CALL studentScheduleOnDate(STUDENTID, DATE (yyyy-mm-dd) );
