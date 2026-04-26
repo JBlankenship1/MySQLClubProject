@@ -11,7 +11,13 @@ DROP TABLE IF EXISTS Clubs;
 DROP TABLE IF EXISTS Faculty;
 DROP TABLE IF EXISTS Students;
 
-
+-- Drop procedures if exists
+DROP PROCEDURE IF EXISTS budgetAllClubs;
+DROP PROCEDURE IF EXISTS remainingBudgetClub;
+DROP PROCEDURE IF EXISTS allClubFaculty;
+DROP PROCEDURE IF EXISTS allClubStudents;
+DROP PROCEDURE IF EXISTS allClubsFromStudent;
+DROP PROCEDURE IF EXISTS StudentScheduleOnDate;
 /*
 Create tables
 */
@@ -133,8 +139,10 @@ END//
 
 DELIMITER ;
 
-DELIMITER //
 
+
+
+DELIMITER //
 CREATE TRIGGER check_club_meeting_conflict
 BEFORE INSERT ON ClubEvents
 FOR EACH ROW
@@ -154,9 +162,123 @@ BEGIN
         SET MESSAGE_TEXT = 'Club has meeting during that time';
     END IF;
 END//
-
 DELIMITER ;
 
+
+
+-- Reports the budget of all clubs in a given year (Requirement 1h)
+-- Call using this statement: CALL budgetAllClubs(YEAR);
+DELIMITER //
+CREATE PROCEDURE budgetAllClubs(IN inputYear INT)
+BEGIN
+    SELECT clubName, clubYear, budget
+    FROM Clubs
+    WHERE clubYear = inputYear;
+END //
+DELIMITER ;
+
+
+--Reports the total expenses and remaining budget of a given club in a given year (Requirement 1g)
+-- Call using this statement: CALL remainingBudgetClub(CLUBNAME, YEAR);
+DELIMITER //
+CREATE PROCEDURE remainingBudgetClub(IN inputClub VARCHAR(30), IN inputYear INT)
+BEGIN
+    SELECT Clubs.clubName, Clubs.clubYear, Clubs.budget,
+        Expenses.totalExpenses AS totalExpenses,
+        Clubs.budget - Expenses.totalExpenses AS remainingBudget
+    FROM Clubs
+    LEFT JOIN (
+        SELECT clubName, clubYear, SUM(amount) AS totalExpenses
+        FROM Expenses
+        GROUP BY clubName, clubYear
+    ) Expenses
+    ON Clubs.clubName = Expenses.clubName
+    AND Clubs.clubYear = Expenses.clubYear
+    WHERE Clubs.clubName = inputClub
+      AND Clubs.clubYear = inputYear;
+END //
+DELIMITER ;
+
+
+--Reports the faculty member of all clubs (Requirement 2b)
+-- Call using this statement: CALL allClubFaculty();
+DELIMITER //
+CREATE PROCEDURE allClubFaculty()
+BEGIN
+    SELECT clubName, clubYear, facultyName, Clubs.facultyID
+    FROM Clubs, Faculty
+    WHERE Clubs.facultyID = Faculty.facultyID;
+END //
+DELIMITER ;
+
+
+
+--Reports all students in a given club in a given year (Requirement 3b)
+-- Call using this statement: CALL allClubStudents(CLUBNAME, YEAR);
+DELIMITER //
+CREATE PROCEDURE allClubStudents(IN inputClub VARCHAR(30), IN inputYear INT)
+BEGIN
+    SELECT Are_in.clubName, Are_in.clubYear, Students.studentID, Students.studentName
+    FROM Students
+    JOIN Are_in
+        ON Students.studentID = Are_in.studentID
+    WHERE Are_in.clubName = inputClub
+      AND Are_in.clubYear = inputYear;
+END //
+DELIMITER ;
+
+
+--Reports all clubs a student is in (Requirement 3c)
+-- Call using this statement: CALL allClubsFromStudent(STUDENTID);
+DELIMITER //
+CREATE PROCEDURE allClubsFromStudent(IN inputStudentID CHAR(6))
+BEGIN
+    SELECT Students.studentName, Students.studentID, Are_in.clubName, Are_in.clubYear
+    FROM Students
+    JOIN Are_in
+        ON Students.studentID = Are_in.studentID
+    WHERE Are_in.studentID = inputStudentID;
+END //
+DELIMITER ;
+
+
+
+--Reports the schedule of a given student on a given day (Requirement 3d)
+-- Call using this statement: CALL studentScheduleOnDate(STUDENTID, DATE (yyyy-mm-dd) );
+DELIMITER //
+CREATE PROCEDURE studentScheduleOnDate(IN inputStudentID CHAR(6), IN inputDate DATE)
+BEGIN
+    -- Meetings result set
+    SELECT
+        'Meeting' AS activityType, Are_in.clubName, Are_in.clubYear,
+        Meetings.meetingStartTime AS startTime,
+        Meetings.meetingEndTime AS endTime,
+        Meetings.classroom AS location,
+        Meetings.meetingDescription AS description,
+        Meetings.meetingDate AS activityDate
+    FROM Are_in
+    JOIN Meetings
+        ON Are_in.clubName = Meetings.clubName
+        AND Are_in.clubYear = Meetings.clubYear
+    WHERE Are_in.studentID = inputStudentID
+      AND Meetings.meetingDate = inputDate;
+    -- Events result set
+    SELECT
+        'Event' AS activityType,
+        Are_in.clubName,
+        Are_in.clubYear,
+        ClubEvents.eventStartTime AS startTime,
+        ClubEvents.eventEndTime AS endTime,
+        ClubEvents.eventDescription AS description,
+        ClubEvents.eventDate AS activityDate
+    FROM Are_in
+    JOIN ClubEvents
+        ON Are_in.clubName = ClubEvents.clubName
+        AND Are_in.clubYear = ClubEvents.clubYear
+    WHERE Are_in.studentID = inputStudentID
+      AND ClubEvents.eventDate = inputDate;
+END //
+DELIMITER ;
 
 
 INSERT INTO Students (studentName, studentID)
