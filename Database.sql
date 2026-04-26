@@ -17,6 +17,7 @@ DROP PROCEDURE IF EXISTS remainingBudgetClub;
 DROP PROCEDURE IF EXISTS allClubFaculty;
 DROP PROCEDURE IF EXISTS allClubStudents;
 DROP PROCEDURE IF EXISTS allClubsFromStudent;
+DROP PROCEDURE IF EXISTS ClubSchedule;
 DROP PROCEDURE IF EXISTS StudentScheduleOnDate;
 /*
 Create tables
