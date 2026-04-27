@@ -4,7 +4,11 @@
 
 Because pushing files with password and login info for the rose DB is unsafe, we initially created a .env file (with a .gitignore) that prevented sensitive info from being pushing. Alas, roseDB does not allow the pip install to support this, so the Interface.py file needs to be seperately changed in order to run. This should not be done with the github file for security.
 
+# Requirements
+Our Python code requires Python Version 3.1 or above
+
 # How to run code
+
 
 1. Login to RoseDB or any db with credentials
 2. Move or export Interface.py and Database.sql into DB
@@ -59,6 +63,6 @@ removes the need for the error checking in the DB) came from https://www.geeksfo
 
 • Match case code was also used as I forgot the syntax as it differs from C's switch statement: https://www.freecodecamp.org/news/python-switch-statement-switch-case-example/. This code just gave a simple image showing the syntax for regular vs default case.
 
-Meeting Link:
-https://us05web.zoom.us/j/81672600181?pwd=ALgauzlYc1Z60FGPZh8SIC1dChWbh5.1
+OpenAI. (2026). ChatGPT (April 27 version) [Large language model]. https://chat.openai.com/
+Used to generate sample data for this assignment 
 
