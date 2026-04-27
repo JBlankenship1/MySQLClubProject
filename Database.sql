@@ -179,7 +179,7 @@ END //
 DELIMITER ;
 
 
---Reports the total expenses and remaining budget of a given club in a given year (Requirement 1g)
+-- Reports the total expenses and remaining budget of a given club in a given year (Requirement 1g)
 -- Call using this statement: CALL remainingBudgetClub(CLUBNAME, YEAR);
 DELIMITER //
 CREATE PROCEDURE remainingBudgetClub(IN inputClub VARCHAR(30), IN inputYear INT)
@@ -201,7 +201,7 @@ END //
 DELIMITER ;
 
 
---Reports the faculty member of all clubs (Requirement 2b)
+-- Reports the faculty member of all clubs (Requirement 2b)
 -- Call using this statement: CALL allClubFaculty();
 DELIMITER //
 CREATE PROCEDURE allClubFaculty()
@@ -214,7 +214,7 @@ DELIMITER ;
 
 
 
---Reports all students in a given club in a given year (Requirement 1b & 3b)
+-- Reports all students in a given club in a given year (Requirement 1b & 3b)
 -- Call using this statement: CALL allClubStudents(CLUBNAME, YEAR);
 DELIMITER //
 CREATE PROCEDURE allClubStudents(IN inputClub VARCHAR(30), IN inputYear INT)
@@ -229,7 +229,7 @@ END //
 DELIMITER ;
 
 
---Reports all clubs a student is in (Requirement 1c & 3c)
+-- Reports all clubs a student is in (Requirement 1c & 3c)
 -- Call using this statement: CALL allClubsFromStudent(STUDENTID);
 DELIMITER //
 CREATE PROCEDURE allClubsFromStudent(IN inputStudentID CHAR(6))
@@ -282,7 +282,7 @@ BEGIN
 END //
 DELIMITER ;
 
---Reports the schedule of a given student on a given day (Requirement 3d)
+-- Reports the schedule of a given student on a given day (Requirement 3d)
 -- Call using this statement: CALL studentScheduleOnDate(STUDENTID, DATE (yyyy-mm-dd) );
 DELIMITER //
 CREATE PROCEDURE studentScheduleOnDate(IN inputStudentID CHAR(6), IN inputDate DATE)
